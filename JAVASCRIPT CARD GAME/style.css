@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 20px;
+}
+
+.player {
+  margin: 20px;
+  padding: 10px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  background: #2a2a2a;
+}
+
+.stats {
+  margin: 10px;
+}
+
+.hand {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card {
+  background-color: #333;
+  border: 1px solid #666;
+  border-radius: 6px;
+  padding: 10px;
+  width: 120px;
+  cursor: pointer;
+}
+
+.card-hover {
+  background-color: #555;
+}
+
+#log {
+  margin-top: 20px;
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background: 111;
+  padding: 10px;
+  border-radius: 8px;
+}
