@@ -32,6 +32,7 @@ body {
   width: 120px;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.2s;
+  color: #fff; /* ✅ ensure card names are visible */
 }
 
 .card:hover {
