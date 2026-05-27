@@ -42,7 +42,12 @@ export class Player {
       }
     }
     this.renderHand(playCardFn);
+    
+    console.log(this.name, "deck before draw:", this.deck.length);
+    console.log(this.name, "discard before draw:", this.discard.length);
   }
+
+  console.log(this.name, "hand after draw:", this.hand.map(c => c.name));
 
   shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -54,6 +59,8 @@ export class Player {
 
 
   // 🎨 Render hand visually with clickable cards
+  console.log("renderHand", this.name, "cards:", this.hand.map(c => c.name));
+  console.log("handEl:", this.handEl);
   renderHand(playCardFn) {
     this.handEl.innerHTML = "";
     this.hand.forEach((card, index) => {
@@ -65,3 +72,4 @@ export class Player {
     });
   }
 }
+
