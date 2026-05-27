@@ -36,11 +36,18 @@ export function playCard(player, card, index) {
   player.updateStats();
   opponent.updateStats();
 
+  // 🎨 Refresh hands visually
   player.renderHand(playCard);
   opponent.renderHand(playCard);
 
+  // 🏆 Check win condition
   checkWin();
+
+  // 🔄 Switch turn to opponent
   currentPlayer = opponent;
+
+  // ✅ Debug: show whose turn it is
+  log(`It is now ${currentPlayer.name}'s turn.`);
 }
 
 // ✅ Now call drawCards AFTER playCard exists
@@ -52,10 +59,10 @@ function checkWin() {
   else if (p2.health <= 0) log("Nomads win!");
 }
 
+// ✅ Place the Next Round handler here, at the bottom
 document.getElementById("next-round").onclick = () => {
   p1.drawCards(3, playCard);
   p2.drawCards(3, playCard);
   log("New round begins!");
-  currentPlayer = p1;
+  currentPlayer = p1; // reset turn to Nomads
 };
-
