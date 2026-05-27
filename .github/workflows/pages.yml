@@ -13,5 +13,5 @@ jobs:
       - uses: actions/configure-pages@v3
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./JAVASCRIPT CARD GAME
+          path: ./javascript-card-game
       - uses: actions/deploy-pages@v3
