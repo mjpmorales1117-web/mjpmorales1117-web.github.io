@@ -31,6 +31,7 @@ export function playCard(player, card, index) {
   }
 
   log(`${player.name} played ${card.name}`);
+  player.discard.push(card);
   player.hand.splice(index, 1);
 
   player.updateStats();
