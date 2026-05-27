@@ -10,6 +10,9 @@ export class Player {
     this.resEl = document.getElementById(resId);
     this.handEl = document.getElementById(handId);
     this.discard = [];
+    renderDiscard() {
+      const discardEL = document.getElementById(this.id + "-discard");
+      discardEl.innerHTML = this.discard.map(card => `<div class="card">${card.name}</div>`).join("");
   }
 
   // 🔄 Update stats on screen
