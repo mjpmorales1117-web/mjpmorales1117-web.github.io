@@ -8,8 +8,8 @@ const p2 = new Player("Raiders", "p2-health", "p2-res", "p2-hand");
 p1.deck = [...cards, ...cards];
 p2.deck = [...cards, ...cards];
 
-p1.drawCards();
-p2.drawCards();
+p1.drawCards(3, playCard);
+p2.drawCards(3, playCard);
 
 let currentPlayer = p1; // Nomads start first
 
