@@ -57,16 +57,31 @@ body {
 }
 
 .discard {
-  margin-top: 10px;
-  min-height: 50px;
-  border: 1px dashed #666;
-  padding: 5px;
+  margin-top: 12px;
+  min-height: 70px;
+  border: 2px dashed #555;
+  padding: 8px;
+  background: #1c1c1c;
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
 }
+
 .discard .card {
-  display: inline-block;
-  margin: 2px;
-  padding: 4px 6px;
-  background: #ccc;
-  border-radius: 4px;
+  background-color: #444;
+  border: 1px solid #888;
+  border-radius: 6px;
+  padding: 6px 10px;
   font-size: 12px;
+  color: #eee;
+  width: auto;
+  cursor: default;
+  transition: transform 0.2s;
+}
+
+.discard .card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px #ffcc00;
 }
