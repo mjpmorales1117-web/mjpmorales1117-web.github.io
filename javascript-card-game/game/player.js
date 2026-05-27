@@ -9,6 +9,7 @@ export class Player {
     this.healthEl = document.getElementById(healthId);
     this.resEl = document.getElementById(resId);
     this.handEl = document.getElementById(handId);
+    this.discard = [];
   }
 
   // 🔄 Update stats on screen
