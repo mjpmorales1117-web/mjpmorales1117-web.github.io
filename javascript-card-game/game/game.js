@@ -5,8 +5,8 @@ import { log } from "./ui.js";
 const p1 = new Player("Nomads", "p1",  "p1-health", "p1-res", "p1-hand");
 const p2 = new Player("Raiders", "p2", "p2-health", "p2-res", "p2-hand");
 
-p1.deck = [...cards, ...cards];
-p2.deck = [...cards, ...cards];
+p1.deck = buildDeck(cards);
+p2.deck = buildDeck(cards);
 
 let currentPlayer = p1; // Nomads start first
 
