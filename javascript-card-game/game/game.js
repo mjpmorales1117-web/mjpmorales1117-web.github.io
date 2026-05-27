@@ -48,6 +48,9 @@ export function playCard(player, card, index) {
 
   // ✅ Debug: show whose turn it is
   log(`It is now ${currentPlayer.name}'s turn.`);
+
+  // 🌟 Update visual indicator
+  updateTurnIndicator();
 }
 
 // ✅ Now call drawCards AFTER playCard exists
@@ -65,6 +68,7 @@ document.getElementById("next-round").onclick = () => {
   p2.drawCards(3, playCard);
   log("New round begins!");
   currentPlayer = p1; // reset turn to Nomads
+  updateTurnIndicator(); // 🌟 highlight Nomads
 };
 
 function updateTurnIndicator() {
