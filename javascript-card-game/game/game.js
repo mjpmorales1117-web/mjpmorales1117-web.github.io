@@ -13,44 +13,54 @@ p2.drawCards();
 
 let currentPlayer = p1; // Nomads start first
 
+// Main function that handles playing a card
 export function playCard(player, card, index) {
+  // ✅ Turn enforcement: only the current player can act
   if (player !== currentPlayer) {
     log(`${player.name} cannot play, it's not their turn.`);
-    return;
+    return; // stop if wrong player tries to play
   }
 
+  // ✅ Identify opponent: simple two-player setup
+  // ⚠️ Future pointer: if you add more players, replace this with a function that cycles through a player list
   const opponent = player === p1 ? p2 : p1;
 
+  // ✅ Combat resolution
   if (card.type === "attack") {
+    // 🛡️ Defense check: if opponent has a block, cancel the attack
     if (opponent.block > 0) {
       log(`${opponent.name} blocked the attack!`);
-      opponent.block -= 1;
+      opponent.block -= 1; // consume one block
     } else {
+      // ⚔️ Damage calculation: basic attack vs rifle
       opponent.health -= (card.name === "Scavenged Rifle" ? 2 : 1);
+      // ⚠️ Future pointer: replace this with card.damage property for easier balancing
     }
   } else {
+    // 📦 Non-attack cards just run their effect (resource gain, raid, alliance, etc.)
     card.effect(player, opponent);
   }
 
+  // 📝 Narration: log what happened
   log(`${player.name} played ${card.name}`);
+
+  // 🗑️ Remove card from hand
+  // ⚠️ Future pointer: instead of deleting, push into a discard pile for revive mechanics
   player.hand.splice(index, 1);
+
+  // 🔄 Update stats on screen
   player.updateStats();
   opponent.updateStats();
+
+  // 🎨 Refresh hands visually
+  // ⚠️ Future pointer: add animations here (fade out card, slide to discard pile, etc.)
   player.renderHand(playCard);
   opponent.renderHand(playCard);
+
+  // 🏆 Check win condition
   checkWin();
 
-  currentPlayer = opponent; // switch turn
+  // 🔄 Switch turn to opponent
+  // ⚠️ Future pointer: if you add "extra turn" cards, adjust this logic
+  currentPlayer = opponent;
 }
-
-function checkWin() {
-  if (p1.health <= 0) log("Raiders win!");
-  else if (p2.health <= 0) log("Nomads win!");
-}
-
-document.getElementById("next-round").onclick = () => {
-  p1.drawCards();
-  p2.drawCards();
-  log("New round begins!");
-  currentPlayer = p1; // reset turn
-};
