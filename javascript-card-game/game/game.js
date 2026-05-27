@@ -82,3 +82,6 @@ function updateTurnIndicator() {
     document.getElementById("p2").classList.add("active");
   }
 }
+
+console.log("Nomads deck", p1.deck);
+console.log("Raiders deck", p2.deck);
