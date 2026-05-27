@@ -66,3 +66,12 @@ document.getElementById("next-round").onclick = () => {
   log("New round begins!");
   currentPlayer = p1; // reset turn to Nomads
 };
+
+function updateTurnIndicator() {
+  document.querySelectorAll(".player").forEach(el => el.classList.remove("active"));
+  if (currentPlayer === p1) {
+    document.getElementById("p1").classList.add("active");
+  } else {
+    document.getElementById("p2").classList.add("active");
+  }
+}
