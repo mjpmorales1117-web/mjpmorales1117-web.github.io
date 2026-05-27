@@ -11,7 +11,7 @@ p2.deck = [...cards, ...cards];
 p1.drawCards();
 p2.drawCards();
 
-let currentPlayer = p1;
+let currentPlayer = p1; // Nomads start first
 
 export function playCard(player, card, index) {
   if (player !== currentPlayer) {
@@ -40,7 +40,7 @@ export function playCard(player, card, index) {
   opponent.renderHand(playCard);
   checkWin();
 
-  currentPlayer = opponent;
+  currentPlayer = opponent; // switch turn
 }
 
 function checkWin() {
@@ -52,4 +52,5 @@ document.getElementById("next-round").onclick = () => {
   p1.drawCards();
   p2.drawCards();
   log("New round begins!");
+  currentPlayer = p1; // reset turn
 };
