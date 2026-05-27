@@ -56,7 +56,7 @@ export function playCard(player, card, index) {
 // ✅ Now call drawCards AFTER playCard exists
 p1.drawCards(3, playCard);
 p2.drawCards(3, playCard);
-updateTurnIndicators();
+updateTurnIndicator();
 
 function checkWin() {
   if (p1.health <= 0) log("Raiders win!");
