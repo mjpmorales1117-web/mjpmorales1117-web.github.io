@@ -29,47 +29,36 @@ export class Player {
   }
 
   // 🎴 Draw cards from deck into hand
-  drawCards(num = 3, playCardFn) {
-    for (let i = 0; i < num; i++) {
-      if (this.deck.length === 0 && this.discard.length > 0) {
-        // ♻️ reshuffle discard into deck
-        this.deck = this.shuffle(this.discard);
-        this.discard = [];
-        this.renderDiscard(); // clear discard pile visually
-      }
-      if (this.deck.length > 0) {
-        this.hand.push(this.deck.shift());
-      }
+drawCards(num = 3, playCardFn) {
+  for (let i = 0; i < num; i++) {
+    if (this.deck.length === 0 && this.discard.length > 0) {
+      this.deck = this.shuffle(this.discard);
+      this.discard = [];
+      this.renderDiscard();
     }
-    this.renderHand(playCardFn);
-    
-    console.log(this.name, "deck before draw:", this.deck.length);
-    console.log(this.name, "discard before draw:", this.discard.length);
+    if (this.deck.length > 0) {
+      this.hand.push(this.deck.shift());
+    }
   }
+  this.renderHand(playCardFn);
 
+  // ✅ logs go here
+  console.log(this.name, "deck before draw:", this.deck.length);
+  console.log(this.name, "discard before draw:", this.discard.length);
   console.log(this.name, "hand after draw:", this.hand.map(c => c.name));
-
-  shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-
-  // 🎨 Render hand visually with clickable cards
-  console.log("renderHand", this.name, "cards:", this.hand.map(c => c.name));
-  console.log("handEl:", this.handEl);
-  renderHand(playCardFn) {
-    this.handEl.innerHTML = "";
-    this.hand.forEach((card, index) => {
-      const div = document.createElement("div");
-      div.className = `card ${card.rarity}`;
-      div.textContent = card.name;
-      div.onclick = () => playCardFn(this, card, index);
-      this.handEl.appendChild(div);
-    });
-  }
 }
 
+renderHand(playCardFn) {
+  this.handEl.innerHTML = "";
+  this.hand.forEach((card, index) => {
+    const div = document.createElement("div");
+    div.className = `card ${card.rarity}`;
+    div.textContent = card.name;
+    div.onclick = () => playCardFn(this, card, index);
+    this.handEl.appendChild(div);
+  });
+
+  // ✅ logs go here
+  console.log("renderHand", this.name, "cards:", this.hand.map(c => c.name));
+  console.log("handEl:", this.handEl);
+}
