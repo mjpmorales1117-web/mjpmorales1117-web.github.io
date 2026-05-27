@@ -15,7 +15,7 @@ export const cards = [
   { name: "Raiders Alliance", type: cardTypes.ALLIANCE, rarity: "rare", cost: 3, effect: (self, opp) => { if (self.resources >= 3) { self.resources -= 3; opp.health -= 4; } } }
 ];
 
-function buildDeck(cardPool) {
+export function buildDeck(cardPool) {
   let deck = [];
   cardPool.forEach(card => {
     if (card.rarity === "common") {
