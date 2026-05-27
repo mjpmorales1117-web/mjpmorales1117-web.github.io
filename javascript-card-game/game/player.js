@@ -1,18 +1,25 @@
 export class Player {
-  constructor(name, healthId, resId, handId) {
+  constructor(name, id, healthId, resId, handId) {
     this.name = name;
+    this.id = id; // 👈 store player id ("p1" or "p2")
     this.health = 15;
     this.resources = 0;
     this.deck = [];
     this.hand = [];
     this.block = 0; // 🛡️ defense shield
+    this.discard = []; // ♻️ discard pile
+
     this.healthEl = document.getElementById(healthId);
     this.resEl = document.getElementById(resId);
     this.handEl = document.getElementById(handId);
-    this.discard = [];
-    renderDiscard() {
-      const discardEL = document.getElementById(this.id + "-discard");
-      discardEl.innerHTML = this.discard.map(card => `<div class="card">${card.name}</div>`).join("");
+  }
+
+  // ♻️ Render discard pile
+  renderDiscard() {
+    const discardEl = document.getElementById(this.id + "-discard");
+    discardEl.innerHTML = this.discard
+      .map(card => `<div class="card">${card.name}</div>`)
+      .join("");
   }
 
   // 🔄 Update stats on screen
@@ -28,7 +35,6 @@ export class Player {
         this.hand.push(this.deck.shift());
       }
     }
-    // Render hand after drawing
     this.renderHand(playCardFn);
   }
 
@@ -39,7 +45,6 @@ export class Player {
       const div = document.createElement("div");
       div.className = "card";
       div.textContent = card.name;
-      // Attach click handler using playCardFn
       div.onclick = () => playCardFn(this, card, index);
       this.handEl.appendChild(div);
     });
