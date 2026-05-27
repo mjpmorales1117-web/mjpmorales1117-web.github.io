@@ -18,9 +18,13 @@ export const cards = [
 function buildDeck(cardPool) {
   let deck = [];
   cardPool.forEach(card => {
-    if (card.rarity === "common") deck.push(...Array(4).fill(card));
-    else if (card.rarity === "uncommon") deck.push(...Array(2).fill(card));
-    else if (card.rarity === "rare") deck.push(card);
+    if (card.rarity === "common") {
+      for (let i = 0; i < 4; i++) deck.push({ ...card });
+    } else if (card.rarity === "uncommon") {
+      for (let i = 0; i < 2; i++) deck.push({ ...card });
+    } else if (card.rarity === "rare") {
+      deck.push({ ...card });
+    }
   });
   return deck;
 }
