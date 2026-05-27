@@ -86,6 +86,21 @@ body {
   box-shadow: 0 0 8px #ffcc00;
 }
 
-.card.common { border-color: #888; }
-.card.uncommon { border-color: #4caf50; }
-.card.rare { border-color: #ffcc00; box-shadow: 0 0 10px #ffcc00; }
+.card.common {
+  border-color: #888;
+}
+
+.card.uncommon {
+  border-color: #4caf50;
+}
+
+.card.rare {
+  border-color: #ffcc00;
+  box-shadow: 0 0 15px #ffcc00;
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
