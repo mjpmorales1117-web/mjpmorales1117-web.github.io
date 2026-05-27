@@ -56,3 +56,17 @@ body {
   box-shadow: 0 0 15px #ffcc00;
 }
 
+.discard {
+  margin-top: 10px;
+  min-height: 50px;
+  border: 1px dashed #666;
+  padding: 5px;
+}
+.discard .card {
+  display: inline-block;
+  margin: 2px;
+  padding: 4px 6px;
+  background: #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+}
