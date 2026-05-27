@@ -58,7 +58,7 @@ export class Player {
     this.handEl.innerHTML = "";
     this.hand.forEach((card, index) => {
       const div = document.createElement("div");
-      div.className = "card";
+      div.className = `card ${card.rarity}`;
       div.textContent = card.name;
       div.onclick = () => playCardFn(this, card, index);
       this.handEl.appendChild(div);
