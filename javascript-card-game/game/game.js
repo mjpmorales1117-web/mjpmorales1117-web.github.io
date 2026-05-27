@@ -1,5 +1,5 @@
 import { Player } from "./player.js";
-import { cards } from "./cards.js";
+import { cards, buildDeck } from "./cards.js";
 import { log } from "./ui.js";
 
 const p1 = new Player("Nomads", "p1",  "p1-health", "p1-res", "p1-hand");
@@ -24,7 +24,7 @@ export function playCard(player, card, index) {
       log(`${opponent.name} blocked the attack!`);
       opponent.block -= 1;
     } else {
-      opponent.health -= (card.name === "Scavenged Rifle" ? 2 : 1);
+      card.effect(player, opponent); // use card’s own effect
     }
   } else {
     card.effect(player, opponent);
