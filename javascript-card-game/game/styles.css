@@ -50,3 +50,9 @@ body {
   padding: 10px;
   border-radius: 8px;
 }
+
+.player.active {
+  border: 2px solid #ffcc00;
+  box-shadow: 0 0 15px #ffcc00;
+}
+
