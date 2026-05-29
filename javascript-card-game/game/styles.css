@@ -25,6 +25,8 @@ body {
 }
 
 .card {
+  background: red !important;
+  color: yellow !important;
   background-color: #333;
   border: 2px solid #888;
   border-radius: 6px;
