@@ -10,6 +10,9 @@ const ai = new EnemyAI(p2, p1);
 p1.deck = buildDeck(cards);
 p2.deck = buildDeck(cards);
 
+console.log("Nomads deck size:", p1.deck.length);
+console.log("Raiders deck size:", p2.deck.length);
+
 let currentPlayer = p1; // Nomads start first
 
 // Main function that handles playing a card
@@ -17,6 +20,11 @@ export function playCard(player, card, index) {
   if (player !== currentPlayer) {
     log(`${player.name} cannot play, it's not their turn.`);
     return;
+  }
+
+  // 🤖 Trigger AI if Raiders are up and have cards
+  if (currentPlayer === p2 && p2.hand.length > 0) {
+  setTimeout(() => ai.takeTurn(), 1000);
   }
 
   const opponent = player === p1 ? p2 : p1;
@@ -60,6 +68,9 @@ p1.drawCards(3, playCard);
 p2.drawCards(3, playCard);
 updateTurnIndicator();
 
+console.log("Nomads hand after draw:", p1.hand);
+console.log("Raiders hand after draw:", p2.hand);
+
 function checkWin() {
   if (p1.health <= 0) log("Raiders win!");
   else if (p2.health <= 0) log("Nomads win!");
@@ -83,5 +94,5 @@ function updateTurnIndicator() {
   }
 }
 
-console.log("Nomads deck", p1.deck);
-console.log("Raiders deck", p2.deck);
+console.log("Nomads deck size:", p1.deck.length);
+console.log("Raiders deck size:", p2.deck.length);
