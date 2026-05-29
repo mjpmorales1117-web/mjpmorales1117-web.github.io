@@ -96,3 +96,10 @@ function updateTurnIndicator() {
 
 console.log("Nomads deck size:", p1.deck.length);
 console.log("Raiders deck size:", p2.deck.length);
+
+// ✅ Run setup only after DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+  p1.drawCards(3, playCard);
+  p2.drawCards(3, playCard);
+  updateTurnIndicator();
+});
