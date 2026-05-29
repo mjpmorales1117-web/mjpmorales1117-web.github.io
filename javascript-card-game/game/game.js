@@ -63,13 +63,12 @@ export function playCard(player, card, index) {
   }
 } // <-- close playCard here
 
-// ✅ Now call drawCards AFTER playCard exists
-p1.drawCards(3, playCard);
-p2.drawCards(3, playCard);
-updateTurnIndicator();
-
-console.log("Nomads hand after draw:", p1.hand);
-console.log("Raiders hand after draw:", p2.hand);
+// ✅ Run setup only after DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+  p1.drawCards(3, playCard);
+  p2.drawCards(3, playCard);
+  updateTurnIndicator();
+});
 
 function checkWin() {
   if (p1.health <= 0) log("Raiders win!");
@@ -96,10 +95,3 @@ function updateTurnIndicator() {
 
 console.log("Nomads deck size:", p1.deck.length);
 console.log("Raiders deck size:", p2.deck.length);
-
-// ✅ Run setup only after DOM is ready
-document.addEventListener("DOMContentLoaded", () => {
-  p1.drawCards(3, playCard);
-  p2.drawCards(3, playCard);
-  updateTurnIndicator();
-});
