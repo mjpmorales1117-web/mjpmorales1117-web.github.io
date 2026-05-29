@@ -1,9 +1,11 @@
 import { Player } from "./player.js";
 import { cards, buildDeck } from "./cards.js";
 import { log } from "./ui.js";
+import { EnemyAI } from "./ai.js";
 
 const p1 = new Player("Nomads", "p1",  "p1-health", "p1-res", "p1-hand");
 const p2 = new Player("Raiders", "p2", "p2-health", "p2-res", "p2-hand");
+const ai = new EnemyAI(p2, p1);
 
 p1.deck = buildDeck(cards);
 p2.deck = buildDeck(cards);
@@ -24,7 +26,7 @@ export function playCard(player, card, index) {
       log(`${opponent.name} blocked the attack!`);
       opponent.block -= 1;
     } else {
-      card.effect(player, opponent); // use card’s own effect
+      card.effect(player, opponent);
     }
   } else {
     card.effect(player, opponent);
@@ -38,22 +40,20 @@ export function playCard(player, card, index) {
   player.updateStats();
   opponent.updateStats();
 
-  // 🎨 Refresh hands visually
   player.renderHand(playCard);
   opponent.renderHand(playCard);
 
-  // 🏆 Check win condition
   checkWin();
 
-  // 🔄 Switch turn to opponent
   currentPlayer = opponent;
-
-  // ✅ Debug: show whose turn it is
   log(`It is now ${currentPlayer.name}'s turn.`);
-
-  // 🌟 Update visual indicator
   updateTurnIndicator();
-}
+
+  // 🤖 Trigger AI if Raiders are up
+  if (currentPlayer === p2) {
+    setTimeout(() => ai.takeTurn(), 1000);
+  }
+} // <-- close playCard here
 
 // ✅ Now call drawCards AFTER playCard exists
 p1.drawCards(3, playCard);
