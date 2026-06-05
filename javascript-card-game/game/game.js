@@ -15,20 +15,15 @@ console.log("Raiders deck size:", p2.deck.length);
 
 let currentPlayer = p1; // Nomads start first
 
-// Main function that handles playing a card
 export function playCard(player, card, index) {
   if (player !== currentPlayer) {
     log(`${player.name} cannot play, it's not their turn.`);
     return;
   }
 
-  // 🤖 Trigger AI if Raiders are up and have cards
-  if (currentPlayer === p2 && p2.hand.length > 0) {
-  setTimeout(() => ai.takeTurn(), 1000);
-  }
-
   const opponent = player === p1 ? p2 : p1;
 
+  // Apply effect logic
   if (card.type === "attack") {
     if (opponent.block > 0) {
       log(`${opponent.name} blocked the attack!`);
@@ -41,10 +36,22 @@ export function playCard(player, card, index) {
   }
 
   log(`${player.name} played ${card.name}`);
-  player.discard.push(card);
-  player.renderDiscard();
+
+  // ✅ Place card into field if slot available
+  const emptyIndex = player.field.findIndex(f => f === null);
+  if (emptyIndex !== -1) {
+    player.field[emptyIndex] = card;
+    player.renderField(); // update slots
+  } else {
+    // if no empty slot, send to discard
+    player.discard.push(card);
+    player.renderDiscard();
+  }
+
+  // Remove from hand
   player.hand.splice(index, 1);
 
+  // Update visuals
   player.updateStats();
   opponent.updateStats();
 
@@ -58,40 +65,7 @@ export function playCard(player, card, index) {
   updateTurnIndicator();
 
   // 🤖 Trigger AI if Raiders are up
-  if (currentPlayer === p2) {
+  if (currentPlayer === p2 && p2.hand.length > 0) {
     setTimeout(() => ai.takeTurn(), 1000);
   }
-} // <-- close playCard here
-
-// ✅ Run setup only after DOM is ready
-document.addEventListener("DOMContentLoaded", () => {
-  p1.drawCards(3, playCard);
-  p2.drawCards(3, playCard);
-  updateTurnIndicator();
-});
-
-function checkWin() {
-  if (p1.health <= 0) log("Raiders win!");
-  else if (p2.health <= 0) log("Nomads win!");
 }
-
-// ✅ Place the Next Round handler here, at the bottom
-document.getElementById("next-round").onclick = () => {
-  p1.drawCards(3, playCard);
-  p2.drawCards(3, playCard);
-  log("New round begins!");
-  currentPlayer = p1; // reset turn to Nomads
-  updateTurnIndicator(); // 🌟 highlight Nomads
-};
-
-function updateTurnIndicator() {
-  document.querySelectorAll(".player").forEach(el => el.classList.remove("active"));
-  if (currentPlayer === p1) {
-    document.getElementById("p1").classList.add("active");
-  } else {
-    document.getElementById("p2").classList.add("active");
-  }
-}
-
-console.log("Nomads deck size:", p1.deck.length);
-console.log("Raiders deck size:", p2.deck.length);
