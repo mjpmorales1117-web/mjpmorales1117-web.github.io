@@ -76,4 +76,19 @@ export class Player {
     // Debug log
     console.log("renderField", this.name, "cards:", this.field.map(c => c?.name || null));
   }
+
+  fillEmptySlots(playCardFn) {
+    const emptySlots = this.field
+      .map((slot, i) => slot === null ? i : null)
+      .filter(i => i !== null);
+
+    emptySlots.forEach(i => {
+      if (this.hand.length > 0) {
+        const card = this.hand.shift(); // take from hand
+        this.field[i] = card;
+      }
+    });
+
+    this.renderHand(playCardFn);
+    this.renderField();
 }
