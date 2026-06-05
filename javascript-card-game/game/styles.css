@@ -103,6 +103,30 @@ body {
   animation: pulse 1s ease-in-out infinite alternate;
 }
 
+.field {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.slot {
+  width: 120px;
+  height: 160px;
+  border: 2px dashed #555;
+  border-radius: 6px;
+  background: #1c1c1c;
+  display: flex;
+  align-items: center;
+  color: #777;
+  font-size: 12px;
+}
+
+.slot:hover {
+  border-color: #ffcc00;
+  box-shadow: 0 0 8px #ffcc00;
+}
+
 @keyframes pulse {
   from { transform: scale(1); }
   to { transform: scale(1.05); }
