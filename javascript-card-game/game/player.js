@@ -8,10 +8,12 @@ export class Player {
     this.hand = [];
     this.block = 0; // 🛡️ defense shield
     this.discard = []; // ♻️ discard pile
+    this.field = new Array(5).fill(null); // ✅ 5 slots ready
 
     this.healthEl = document.getElementById(healthId);
     this.resEl = document.getElementById(resId);
     this.handEl = document.getElementById(handId);
+    this.fieldEl = document.querySelector(`#${id} .field`); // reference to field slots
   }
 
   // ♻️ Render discard pile
@@ -57,9 +59,21 @@ export class Player {
       div.onclick = () => playCardFn(this, card, index);
       this.handEl.appendChild(div);
     });
+  }
 
-    // ✅ logs go here
-    console.log("renderHand", this.name, "cards:", this.hand.map(c => c.name));
-    console.log("handEl:", this.handEl);
+  renderField() {
+    const slots = this.fieldEl.querySelectorAll(".slot");
+    slots.forEach((slot, i) => {
+      slot.innerHTML = "";
+      if (this.field[i]) {
+        const card = this.field[i];
+        const cardEl = document.createElement("div");
+        cardEl.className = `card ${card.rarity || "common"}`;
+        cardEl.textContent = card.name;
+        slot.appendChild(cardEl);
+      }
+    });
+    // Debug log
+    console.log("renderField", this.name, "cards:", this.field.map(c => c?.name || null));
   }
 }
