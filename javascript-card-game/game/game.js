@@ -69,3 +69,13 @@ export function playCard(player, card, index) {
     setTimeout(() => ai.takeTurn(), 1000);
   }
 }
+
+// ⬇️ Place the Next Round handler here, at the very bottom
+document.getElementById("next-round").onclick = () => {
+  resolveRound(); // ✅ resolve all chosen cards
+  p1.drawCards(3, playCard);
+  p2.drawCards(3, playCard);
+  log("New round begins!");
+  currentPlayer = p1; // reset turn to Nomads
+  updateTurnIndicator();
+};
